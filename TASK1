@@ -1,0 +1,134 @@
+#include <iostream>
+using namespace std;
+
+class ATM
+{
+private:
+  double balance;
+
+public:
+  ATM(int bal)
+  {
+    balance = bal;
+  }
+  int getBalance()
+  {
+    return balance;
+  }
+  int withdraw(int amount)
+  {
+    if (balance < amount)
+    {
+      return false;
+      
+    }
+   else{
+    balance = balance - amount;
+    return true;
+   }
+  }
+  void deposit(int amount)
+  {
+    balance = balance + amount;
+  }
+};
+int main() {
+    
+   ATM manoj(100000);
+
+  int pincode, choice;
+  int pin = 1234;
+  char op;
+  int amount;
+  int success;
+  int a;
+    
+  do
+  {
+    system("cls");
+    cout << "----------------------------------------------------" << endl;
+    cout << "WELCOME TO UNION BANK" << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << "INSERT YOUR CARD" << endl;
+    cout << "DO NOT REMOVE THE CARD BEFORE TRANSACTION" << endl;
+    cout << "Enter PIN number:" << endl;
+    cin >> pincode;
+    if (pin == pincode)
+    {
+      cout << "SERVICES ON ATM ARE:" << endl;
+      cout << "[1]:- INQUIRY " << endl;
+      cout << "[2]:- WITHDRAWAL " << endl;
+      cout << "[3]:- DEPOSIT " << endl;
+      cout << "[4]:- QUIT" << endl;
+      cout << "SELECT YOUR CHOICE" << endl;
+      cin >> choice;
+
+      switch (choice)
+      {
+      case 1:
+        cout << "INQUIRY" << endl;
+        cout << "Balance" << manoj.getBalance();
+       break;
+      case 2:
+        cout << "WITHDRAWAL" << endl;
+        cout << "ENTER THE AMOUNT TO BE WITHDRAWEN:" << endl;
+        cin >> amount;
+        success = manoj.withdraw(amount);
+        if (success)
+        {
+          cout << "DO NOT REMOVE THE CARD WHILE THE TRANSACTION IS BEING PROCESSED." << endl;
+          cout << "TAKE THE CASH" << endl;
+          cout << "Withdrawal Successful......" << endl;
+          cout << "Would you like to see avaiable Balance:  1 <-- YES  2 <--- NO" << endl;
+          cin>>a;
+          if (a == 1)
+          {
+            cout << "Balance:" << manoj.getBalance();
+          }
+          else
+          {
+            cout << "Withdrawal Successful......" << endl;
+          }
+        }
+
+        else
+        {
+          cout << "INSUFFICIENT BALANCE." << endl;
+        }
+       break;
+     case 3:
+        cout << "DEPOSIT PANEL" << endl;
+        cout << "Enter the amount to Deposit:" << endl;
+        cin >> amount;
+        manoj.deposit(amount);
+        cout << "Deposit Successful" << endl;
+        cout << "Would you like to see avaiable Balance:  1 <-- YES  2 <--- NO" << endl;
+        cin>>a;
+        if (a == 1)
+        {
+          cout << "Balance:" << manoj.getBalance();
+        }
+        else
+        {
+          cout << "Deposit Successful" << endl;
+        }
+
+        break;
+      case 4:
+        cout << "Thanks for using ATM" << endl;
+      
+      default:
+        cout << "Invalid choice" << endl;
+      }
+    }
+    else{
+     cout<<"error check and re-enter pincode"<<endl;
+      } 
+       cout <<endl<< "Do you want to try Another Transaction[YES / NO] :" << endl;
+        cin >> op;
+  }while (op == 'y' || op == 'Y');  
+  
+ 
+
+    return 0;
+}
